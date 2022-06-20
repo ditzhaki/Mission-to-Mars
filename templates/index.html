@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mission to Mars</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/stylesheet.css') }}">
@@ -12,9 +13,9 @@
     <div class="container">
 
         <!-- Jumbotron Header -->
-        <div style="background-color: #ca5a1a" class="jumbotron text-center">
+        <div style="background-color: #b6b6b6" class="jumbotron text-center">
             <h1><u><strong>Mission to Mars</strong></u></h1>
-            <p><a class="btn btn-primary" href="/scrape" role="button">Scrape New Data</a></p>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
 
         <!-- Mars News -->
@@ -23,21 +24,20 @@
                 <div class="media">
                     <div class="media-body">
                         <h2>Latest Mars News</h2>
-                        <h4 class="media-handling text-right">{{mars.news_title}}</h4>
+                        <h4 class="media-handling">{{mars.news_title}}</h4>
                         <p class="text-right" >{{mars.news_paragraph}}</p>    
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Image and Facts -->
+        <!-- Mars Featured Image -->
         <div class="row" id="mars-featured-image">
-            <!-- Featured Image-->
             <div class="col-md-8">
                 <h2>Featured Mars Image</h2>
-                <img src="{{mars.featured_image | default('static/images/error.png', true) }}" class="img-responsive img-rounded" alt="Responsive image">
+                <img src="{{mars.featured_image }}" class= "img-responsive" alt= "Responsive image">
             </div>
-            <!-- Mars Facts table-->
+            <!-- Mars Facts -->
             <div class="col-md-4">
                 <div class="row" id="mars-facts">
                     <h4>Mars Facts</h4>
