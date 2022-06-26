@@ -10,11 +10,11 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
-    <div class="container" style = "background-color: lemonchiffon;">
+    <div class="container" style = "background-color: rgb(213, 194, 177);">
         <!-- Jumbotron Header -->
-        <div style="background-color: #e6e7d9" class="jumbotron text-center">
-            <h1>Mission to Mars</h1>
-            <p><a class="btn btn-warning btn-lg" href="/scrape" data-toggle="tooltip" title="Click me!" role="button">Scrape New Data</a></p>
+        <div style="background-color: #7b6c4c" class="jumbotron text-center">
+            <h1><u>Mission to Mars</u></h1>
+            <p><a class="btn btn-warning btn-lg" href="/scrape" data-toggle="tooltip" title="Scrape Data" role="button">Scrape New Data</a></p>
         </div>
 
         <!-- Mars News -->
@@ -40,10 +40,8 @@
             <!-- Mars Facts table-->
             <div class="col-md-4">
                 <div class="row" id="mars-facts">
-                    <h3>Mars Facts</h3>
-                    <table class="table table-striped">
+                    <h2>Mars Facts</h2>
                     {{mars.facts | safe }}
-                    </table>
                 </div>
             </div>
         </div>
