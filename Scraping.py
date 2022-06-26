@@ -18,18 +18,19 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
+        "hemispheres": hemispheres(browser),
         "last_modified": dt.datetime.now()}
 
     # Stop webdriver and return data
     browser.quit()
     return data
 
-# ### Visit the Mars NASA news site
+# Visit the Mars NASA news site
 
 def mars_news(browser):
 
     # Visit the mars nasa news site
-    url = 'https://redplanetscience.com'
+    url = 'https://redplanetscience.com/'
     browser.visit(url)
 
     # Optional delay for loading the page
@@ -52,7 +53,7 @@ def mars_news(browser):
 
     return news_title, news_p
 
-# ### Featured Images
+# Featured Images
 
 def featured_image(browser):
 
@@ -80,7 +81,7 @@ def featured_image(browser):
 
     return img_url
 
-# ### Mars News
+# Mars News
 
 def mars_facts():
 
@@ -98,6 +99,45 @@ def mars_facts():
 
     # Convert DataFrame to html
     return df.to_html(classes = "table table-bordered table-condensed table-hover")
+
+# Hemispheres
+
+def hemispheres(browser):
+
+    url = url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    # Optional delay for loading the page
+    browser.is_element_present_by_css('div.list_text', wait_time=1)
+
+    # Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+
+    # Parse the HTML with beautifulsoup
+    html = browser.html
+    hemi_list = soup(html, 'html.parser')
+
+    hemi_items = hemi_list.find_all('div', class_='item')
+    base_part_url = 'https://marshemispheres.com/'
+
+    for item in hemi_items:
+        url = item.find("a")['href']
+        browser.visit(base_part_url+url)
+        
+        # Parse individual hemi page
+        hemi_items_html = browser.html
+        hemi_soup = soup(hemi_items_html, 'html.parser')
+        
+        # Scrape the title
+        title = hemi_soup.find('h2', class_ = 'title').text
+        
+        # Define and append to the dictionary
+        downloads = hemi_soup.find('div', class_ = 'downloads')
+        image_url = downloads.find('a')['href']
+        
+        hemisphere_image_urls.append({"title": title, "img url": base_part_url + image_url})
+
+    return hemisphere_image_urls
 
 if __name__ == "__main__":
     # If running as script, print scraped data
